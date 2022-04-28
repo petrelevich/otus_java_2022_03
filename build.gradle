@@ -1,7 +1,10 @@
 plugins {
     id 'idea'
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id 'org.springframework.boot' version '2.6.6' apply false
     id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
+    id 'com.google.cloud.tools.jib' version '3.2.1' apply false
+    id 'io.freefair.lombok' version '6.4.2' apply false
 }
 
 idea {
@@ -27,6 +30,7 @@ allprojects {
         dependencies {
             imports {
                 mavenBom("org.springframework.boot:spring-boot-dependencies:2.6.6")
+                mavenBom 'org.testcontainers:testcontainers-bom:1.17.1'
             }
             dependency "com.google.guava:guava:${Versions.guava}"
             dependency("org.openjdk.jmh:jmh-core:${Versions.jmh}")
