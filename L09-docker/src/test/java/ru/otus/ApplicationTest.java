@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ApplicationTest {
+class ApplicationTest extends BaseContainerTest {
 
     @Test
     void test() throws URISyntaxException, IOException, InterruptedException {
