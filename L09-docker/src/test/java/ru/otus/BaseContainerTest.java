@@ -12,7 +12,7 @@ public abstract class BaseContainerTest {
     private static final String imageName = "registry.gitlab.com/petrelevich/dockerregistry/rest-hello:v12";
     private static final GenericContainer<?> REST_CONTAINER =
             new GenericContainer<>(DockerImageName.parse(imageName))
-                    .withReuse(true) //To enable reuse of containers, you must set 'testcontainers.reuse.enable=true' in a file located at /home/sergey/.testcontainers.properties
+                    .withReuse(true) //To enable reuse of containers, you must set 'testcontainers.reuse.enable=true' in a file located at ~/.testcontainers.properties
                     .withExposedPorts(PORT);
 
     static {
