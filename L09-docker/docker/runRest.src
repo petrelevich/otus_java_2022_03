@@ -1,3 +1,6 @@
+docker run hello-world
+docker stats
+------
 docker run --rm --name rest-service \
 -p 8080:8080 \
 registry.gitlab.com/petrelevich/dockerregistry/rest-hello:v13
@@ -31,4 +34,3 @@ docker run --rm --name rest-service \
 -e JAVA_TOOL_OPTIONS="-XX:InitialRAMPercentage=80 -XX:MaxRAMPercentage=80 -XX:+UseSerialGC" \
 registry.gitlab.com/petrelevich/dockerregistry/rest-hello:v13
 
-docker stats
