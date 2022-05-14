@@ -13,6 +13,7 @@ public class Customer {
         this.scores = scores;
     }
 
+
     public long getId() {
         return id;
     }
@@ -23,6 +24,7 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+
     }
 
     public long getScores() {
@@ -30,17 +32,13 @@ public class Customer {
     }
 
     public void setScores(long scores) {
-        this.scores = scores;
+
+        if (scores < 3000) {
+            this.scores = scores;
+        };
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", scores=" + scores +
-                '}';
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -50,15 +48,22 @@ public class Customer {
         Customer customer = (Customer) o;
 
         if (id != customer.id) return false;
-        if (scores != customer.scores) return false;
-        return name != null ? name.equals(customer.name) : customer.name == null;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (int) (scores ^ (scores >>> 32));
+        int result = 7;
+        result = 31 * result + (int) id;
         return result;
+    }
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", scores=" + scores +
+                '}';
     }
 }
