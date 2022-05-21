@@ -1,6 +1,6 @@
 package homework;
-
-public class Customer {
+import java.io.Serializable;
+public class Customer implements Serializable {
     private final long id;
     private String name;
     private long scores;
