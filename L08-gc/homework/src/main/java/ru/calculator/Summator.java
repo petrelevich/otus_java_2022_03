@@ -14,7 +14,7 @@ public class Summator {
     //!!! сигнатуру метода менять нельзя
     public void calc(Data data) {
         listValues.add(data);
-        if (listValues.size() == 6_600_000) {
+        if (listValues.size() % 6_600_000 == 0) {
             listValues.clear();
         }
         sum += data.getValue();
@@ -23,9 +23,9 @@ public class Summator {
 
         prevPrevValue = prevValue;
         prevValue = data.getValue();
-        double a = Math.pow(sumLastThreeValues, 2);
+
         for (var idx = 0; idx < 3; idx++) {
-            someValue += ((int)a/ (data.getValue() + 1) - sum);
+            someValue += (sumLastThreeValues * sumLastThreeValues / (data.getValue() + 1) - sum);
             someValue = Math.abs(someValue) + listValues.size();
         }
     }
