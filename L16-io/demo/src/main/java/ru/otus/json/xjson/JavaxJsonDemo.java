@@ -1,13 +1,13 @@
 package ru.otus.json.xjson;
 
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonNumber;
-import javax.json.JsonObject;
-import javax.json.JsonString;
-import javax.json.JsonStructure;
-import javax.json.JsonValue;
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonNumber;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonString;
+import jakarta.json.JsonStructure;
+import jakarta.json.JsonValue;
 import java.util.Map;
 
 public class JavaxJsonDemo {
@@ -34,33 +34,30 @@ public class JavaxJsonDemo {
 
     private static void navigateTree(JsonValue tree) {
         switch (tree.getValueType()) {
-            case OBJECT:
+            case OBJECT -> {
                 System.out.println("OBJECT");
                 var jsonObject = (JsonObject) tree;
                 for (Map.Entry<String, JsonValue> entry : jsonObject.entrySet()) {
                     navigateTree(jsonObject.get(entry.getKey()));
                 }
-                break;
-            case ARRAY:
+            }
+            case ARRAY -> {
                 System.out.println("ARRAY");
                 JsonArray array = (JsonArray) tree;
                 for (JsonValue val : array) {
                     navigateTree(val);
                 }
-                break;
-            case STRING:
+            }
+            case STRING -> {
                 JsonString st = (JsonString) tree;
                 System.out.println("STRING " + st.getString());
-                break;
-            case NUMBER:
+            }
+            case NUMBER -> {
                 JsonNumber num = (JsonNumber) tree;
                 System.out.println("NUMBER " + num.toString());
-                break;
-            case TRUE:
-            case FALSE:
-            case NULL:
-                System.out.println(tree.getValueType().toString());
-                break;
+            }
+            case TRUE, FALSE, NULL -> System.out.println(tree.getValueType().toString());
+            default -> throw new IllegalStateException("Unexpected value: " + tree.getValueType());
         }
     }
 
