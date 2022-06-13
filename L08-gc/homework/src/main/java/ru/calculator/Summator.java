@@ -3,6 +3,7 @@ package ru.calculator;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Summator {
     private Integer sum = 0;
     private Integer prevValue = 0;
