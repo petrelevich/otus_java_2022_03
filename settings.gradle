@@ -31,3 +31,7 @@ include 'L17-nio-logging'
 
 include 'L18-jdbc:demo'
 include 'L18-jdbc:homework'
+
+include 'L19-rdbms'
+
+include 'L20-hibernate'
