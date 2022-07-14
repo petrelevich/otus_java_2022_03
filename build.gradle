@@ -1,7 +1,7 @@
 plugins {
     id 'idea'
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
-    id 'org.springframework.boot' version '2.6.6' apply false
+    id 'org.springframework.boot' version '2.7.1' apply false
     id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
     id 'com.google.cloud.tools.jib' version '3.2.1' apply false
     id 'io.freefair.lombok' version '6.4.2' apply false
@@ -29,7 +29,7 @@ allprojects {
     dependencyManagement {
         dependencies {
             imports {
-                mavenBom "org.springframework.boot:spring-boot-dependencies:2.7.0"
+                mavenBom "org.springframework.boot:spring-boot-dependencies:2.7.1"
                 mavenBom "org.testcontainers:testcontainers-bom:1.17.1"
                 mavenBom "com.google.protobuf:protobuf-bom:3.21.1"
             }
@@ -38,6 +38,12 @@ allprojects {
             dependency "org.openjdk.jmh:jmh-generator-annprocess:${Versions.jmh}"
             dependency "org.ow2.asm:asm-commons:${Versions.asm}"
             dependency("org.glassfish:jakarta.json:${Versions.glassfishJson}")
+            dependency("org.webjars:sockjs-client:${Versions.sockjs}")
+            dependency("org.webjars:stomp-websocket:${Versions.stomp}")
+            dependency("org.webjars:bootstrap:${Versions.bootstrap}")
+            dependency("org.springdoc:springdoc-openapi-ui:${Versions.springDocOpenapiUi}")
+
+            dependency("com.google.code.findbugs:jsr305:${Versions.jsr305}")
         }
     }
 
