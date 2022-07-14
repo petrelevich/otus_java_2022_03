@@ -13,7 +13,7 @@ import ru.otus.mainpackage.configs.AppConfigForBean;
 
 import java.util.Map;
 
-//@RestController
+@RestController
 @RequestMapping("${application.rest.api.prefix}/v1")
 public class GreetingController {
     private static final Logger logger = LoggerFactory.getLogger(GreetingController.class);

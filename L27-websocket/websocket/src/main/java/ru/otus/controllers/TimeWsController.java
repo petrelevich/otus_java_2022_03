@@ -19,6 +19,7 @@ public class TimeWsController {
 
     @Scheduled(fixedDelay = 1000)
     public void broadcastCurrentTime() {
-        template.convertAndSend("/topic/currentTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)));
+        template.convertAndSend("/topic/currentTime",
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)));
     }
 }
