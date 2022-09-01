@@ -1,14 +1,12 @@
 package ru.petrelevich.api;
 
 
-import java.time.Duration;
-import java.time.temporal.TemporalUnit;
-import java.util.concurrent.TimeUnit;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import ru.petrelevich.domain.Message;
 import ru.petrelevich.domain.MessageDto;
@@ -17,8 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import ru.petrelevich.service.DataStore;
-
-import static java.time.temporal.ChronoUnit.SECONDS;
 
 @RestController
 public class DataController {
@@ -37,7 +33,10 @@ public class DataController {
         var messageStr = messageDto.messageStr();
         log.info("messageFromChat, roomId:{}, msg:{}", roomId, messageStr);
 
-        dataStore.saveMessage(new Message(roomId, messageStr))
+        Mono.just(new Message(roomId, messageStr))
+                .publishOn(workerPool)
+                .doOnNext(msg -> log.info("msg saving:{}", msg))
+                .flatMap(dataStore::saveMessage)
                 .publishOn(workerPool)
                 .doOnNext(msgSaved -> log.info("msgSaved id:{}", msgSaved.getId()))
                 .subscribe();

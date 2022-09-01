@@ -41,4 +41,13 @@ public class Message {
     public String getMsgText() {
         return msgText;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", roomId='" + roomId + '\'' +
+                ", msgText='" + msgText + '\'' +
+                '}';
+    }
 }

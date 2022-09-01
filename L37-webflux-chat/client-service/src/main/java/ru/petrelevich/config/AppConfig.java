@@ -5,8 +5,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
-import org.springframework.boot.web.reactive.server.ReactiveWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
@@ -24,7 +22,6 @@ public class AppConfig {
                 .baseUrl(url)
                 .build();
     }
-
 
     @Bean
     public ObjectMapper objectMapper() {
