@@ -37,7 +37,7 @@ public class MessageController {
     public Message getMessage(@DestinationVariable String roomId, Message message) {
         logger.info("got message:{}, roomId:{}", message, roomId);
         saveMessage(roomId, message)
-                .subscribe(status -> logger.info("message send status:{}", status));
+                .subscribe(msgId -> logger.info("message send id:{}", msgId));
         return new Message(HtmlUtils.htmlEscape(message.messageStr()));
     }
 
@@ -66,12 +66,11 @@ public class MessageController {
         }
     }
 
-    private Mono<HttpStatus> saveMessage(String roomId, Message message) {
+    private Mono<Long> saveMessage(String roomId, Message message) {
         return datastoreClient.post().uri(String.format("/msg/%s", roomId))
                 .accept(MediaType.APPLICATION_JSON)
                 .bodyValue(message)
-                .exchangeToMono(response ->
-                        Mono.fromCallable(response::statusCode));
+                .exchangeToMono(response -> response.bodyToMono(Long.class));
     }
 
     private Flux<Message> getMessagesByRoomId(long roomId) {

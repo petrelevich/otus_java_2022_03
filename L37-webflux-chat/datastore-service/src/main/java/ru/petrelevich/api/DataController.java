@@ -28,20 +28,21 @@ public class DataController {
     }
 
     @PostMapping(value = "/msg/{roomId}")
-    public void messageFromChat(@PathVariable("roomId") String roomId,
-                                @RequestBody MessageDto messageDto) {
+    public Mono<Long> messageFromChat(@PathVariable("roomId") String roomId,
+                                      @RequestBody MessageDto messageDto) {
         var messageStr = messageDto.messageStr();
         log.info("messageFromChat, roomId:{}, msg:{}", roomId, messageStr);
 
-        Mono.just(new Message(roomId, messageStr))
-                .publishOn(workerPool)
+        var msgId = Mono.just(new Message(roomId, messageStr))
                 .doOnNext(msg -> log.info("msg saving:{}", msg))
                 .flatMap(dataStore::saveMessage)
                 .publishOn(workerPool)
                 .doOnNext(msgSaved -> log.info("msgSaved id:{}", msgSaved.getId()))
-                .subscribe();
+                .map(Message::getId)
+                .subscribeOn(workerPool);
 
         log.info("messageFromChat, roomId:{}, msg:{} done", roomId, messageStr);
+        return msgId;
     }
 
     @GetMapping(value = "/msg/{roomId}", produces = MediaType.APPLICATION_NDJSON_VALUE)
