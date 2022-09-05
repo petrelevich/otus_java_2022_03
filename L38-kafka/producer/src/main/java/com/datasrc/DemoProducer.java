@@ -9,8 +9,8 @@ public class DemoProducer {
     public static void main(String[] args) {
         var producer = new MyProducer("localhost:9092");
 
-        var dataProducer = new DataSender(producer, stringValue -> log.info("asked, value:{}", stringValue));
-        var valueSource = new StringValueSource(dataProducer::dataHandler);
+        var dataSender = new DataSender(producer, stringValue -> log.info("asked, value:{}", stringValue));
+        var valueSource = new StringValueSource(dataSender::dataHandler);
         valueSource.generate();
     }
 }
