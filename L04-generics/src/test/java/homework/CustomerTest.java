@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ class CustomerTest {
     }
 
     @Test
-    @Disabled //надо удалить
+
     @DisplayName("Объект Customer как ключ в карте")
     void customerAsKeyTest() {
         //given
@@ -57,12 +58,12 @@ class CustomerTest {
     }
 
     @Test
-    @Disabled //надо удалить
+
     @DisplayName("Сортировка по полю score, итерация по возрастанию")
-    void scoreSortingTest() {
+    void scoreSortingTest() throws IOException, ClassNotFoundException {
         //given
         Customer customer1 = new Customer(1, "Ivan", 233);
-        Customer customer2 = new Customer(2, "Petr", 11);
+        Customer customer2 = new Customer(4, "Petr", 11);
         Customer customer3 = new Customer(3, "Pavel", 888);
 
         CustomerService customerService = new CustomerService();
@@ -97,9 +98,9 @@ class CustomerTest {
     }
 
     @Test
-    @Disabled //надо удалить
+
     @DisplayName("Модификация коллекции")
-    void mutationTest() {
+    void mutationTest() throws IOException, ClassNotFoundException {
         //given
         Customer customer1 = new Customer(1, "Ivan", 233);
         Customer customer2 = new Customer(2, "Petr", 11);
@@ -119,7 +120,7 @@ class CustomerTest {
     }
 
     @Test
-    @Disabled //надо удалить
+
     @DisplayName("Возвращание в обратном порядке")
     void reverseOrderTest() {
         //given

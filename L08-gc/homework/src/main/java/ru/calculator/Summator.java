@@ -3,6 +3,7 @@ package ru.calculator;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Summator {
     private Integer sum = 0;
     private Integer prevValue = 0;
@@ -14,7 +15,7 @@ public class Summator {
     //!!! сигнатуру метода менять нельзя
     public void calc(Data data) {
         listValues.add(data);
-        if (listValues.size() % 6_600_000 == 0) {
+        if (listValues.size() == 6_600_000) {
             listValues.clear();
         }
         sum += data.getValue();
@@ -23,9 +24,9 @@ public class Summator {
 
         prevPrevValue = prevValue;
         prevValue = data.getValue();
-
+        double a = Math.pow(sumLastThreeValues, 2);
         for (var idx = 0; idx < 3; idx++) {
-            someValue += (sumLastThreeValues * sumLastThreeValues / (data.getValue() + 1) - sum);
+            someValue += ((int)a/ (data.getValue() + 1) - sum);
             someValue = Math.abs(someValue) + listValues.size();
         }
     }
