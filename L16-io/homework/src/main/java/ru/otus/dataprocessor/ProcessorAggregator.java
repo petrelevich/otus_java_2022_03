@@ -24,17 +24,14 @@ public class ProcessorAggregator implements Processor {
             Measurement measurement = gson.fromJson(wordsArray[i], Measurement.class);
             list.add(measurement.getName() + "=" + measurement.getValue());
 
-            System.out.println(list);
 
         }
 
-        Map<String, Double> result = list.stream()
-                .map(e -> e.split("="))
-                .collect(groupingBy(e -> e[0],
-                        summingDouble(e -> Double.parseDouble(e[1]))));
-        System.out.println(result);
-
-        return result;
+        Map<String, Double> result = list.stream().map(e -> e.split("=")).collect(groupingBy(e -> e[0], summingDouble(e -> Double.parseDouble(e[1]))));
+//Сортируем изначальный map
+        Map<String, Double> sortedMap = new TreeMap<>(result);
+        sortedMap.entrySet().forEach(System.out::println);
+        return sortedMap;
     }
 
 }
