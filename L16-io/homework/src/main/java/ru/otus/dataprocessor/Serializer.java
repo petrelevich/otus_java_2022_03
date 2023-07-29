@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface Serializer {
 
-    String serialize(Map<String, Double> data) throws IOException;
+    void serialize(Map<String, Double> data);
 }
