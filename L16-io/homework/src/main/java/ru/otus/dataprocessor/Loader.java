@@ -7,5 +7,5 @@ import java.util.List;
 //Унифицированный интерфейс для загрузки файлов
 public interface Loader {
 
-    List<Measurement> load() throws JsonProcessingException;
+    List<Measurement> load();
 }

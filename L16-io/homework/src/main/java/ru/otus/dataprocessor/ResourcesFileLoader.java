@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ResourcesFileLoader implements Loader {
     private final ObjectMapper objectMapper = new ObjectMapper();
-    File file;
+    private final File file;
 
     public ResourcesFileLoader(String fileName) throws JsonProcessingException {
         file = new File(fileName);
@@ -25,11 +25,16 @@ public class ResourcesFileLoader implements Loader {
     }
 
     @Override
-    public List<Measurement> load() throws JsonProcessingException {
+    public List<Measurement> load() {
         //читает файл, парсит и возвращает результат
-        var jsonReader = Json.createReader(ResourcesFileLoader.class.getClassLoader().getResourceAsStream("inputData.json"));
+        var jsonReader = Json.createReader(ResourcesFileLoader.class.getClassLoader().getResourceAsStream(String.valueOf(file)));
             JsonStructure jsonFromTheFile = jsonReader.read();
-        List<Measurement> list = objectMapper.readValue(String.valueOf(jsonFromTheFile), List.class);
+        List<Measurement> list = null;
+        try {
+            list = objectMapper.readValue(String.valueOf(jsonFromTheFile), List.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
 
         return list;

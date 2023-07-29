@@ -11,7 +11,7 @@ import java.util.Map;
 public class FileSerializer implements Serializer {
 
     private final ObjectMapper mapper = new ObjectMapper();
-    File files;
+    private final File files;
 
     public FileSerializer(String fileName) throws IOException {
 
