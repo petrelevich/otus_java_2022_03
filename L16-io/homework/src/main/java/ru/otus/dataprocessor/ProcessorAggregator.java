@@ -17,11 +17,9 @@ public class ProcessorAggregator implements Processor {
         Gson gson = builder.create();
         ArrayList<String> list = new ArrayList<String>();
 
-        String[] wordsArray = new String[data.size()];
         for (int i = 0; i < data.size(); i++) {
 
-            wordsArray[i] = String.valueOf(data.get(i));
-            Measurement measurement = gson.fromJson(wordsArray[i], Measurement.class);
+            Measurement measurement = gson.fromJson(String.valueOf(data.get(i)), Measurement.class);
             list.add(measurement.getName() + "=" + measurement.getValue());
 
 
